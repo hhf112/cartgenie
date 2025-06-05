@@ -3,8 +3,22 @@ import { createContext, type SetStateAction } from "react";
 import { useState } from "react";
 import { SessionContext } from "./SessionContextProvider";
 
+
+
+//globals
+declare global {
+  interface Image {
+    file: File,
+    url: string,
+    uploaded: boolean,
+    key: string
+  }
+}
+
 export const serverAddress = import.meta.env.VITE_SERVER_ADDRESS;
 
+
+//interfaces
 export interface promptContextType {
   serverAddress: string,
   images: Image[],
@@ -13,6 +27,7 @@ export interface promptContextType {
   removeImageFromState: (imageKey: string) => void,
 }
 
+//init context
 export const promptContext = createContext<promptContextType>({
   serverAddress: "",
   images: [],
@@ -21,28 +36,17 @@ export const promptContext = createContext<promptContextType>({
   removeImageFromState: () => { },
 });
 
-declare global {
-  interface Image {
-    file: File,
-    url: string,
-    uploaded: boolean,
-    key: string
 
-  }
-}
-
-interface PromptContextProviderContexts {
-  children: React.ReactNode;
-}
 export function PromptContextProvider({
   children,
-}: PromptContextProviderContexts) {
-  const { sessionToken } = useContext(SessionContext);
+}: {children: React.ReactNode}) {
+  
+  //states
   const [images, setImages] = useState<Image[]>([]);
 
 
 
-
+  //funcs
   function resetQuery() {
     setImages([]);
   }

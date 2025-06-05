@@ -1,10 +1,12 @@
 import { createContext, useState } from "react";
 
+//interfaces
 export interface SessionContextType {
   sessionToken: string,
   initSessionToken: () => void
 }
 
+//init context
 export const SessionContext = createContext<SessionContextType>({
   sessionToken: "",
   initSessionToken: () => { }
@@ -12,8 +14,11 @@ export const SessionContext = createContext<SessionContextType>({
 
 
 export function SessionContextProvider({ children }: { children: React.ReactNode }) {
+  //
+  //states
   const [sessionToken, setSessionToken] = useState<string>("");
 
+  //funcs
   function initSessionToken() {
     setSessionToken(crypto.randomUUID());
   }
