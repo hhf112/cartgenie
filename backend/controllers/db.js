@@ -31,6 +31,7 @@ export const fetchUser = async (req, res) => {
   }
   else {
     console.log(users)
-    res.status(200).json({username: users})
+    res.status(200).json({ username: users })
   }
 }
+

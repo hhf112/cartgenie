@@ -5,6 +5,7 @@ import { promptContext } from "./contexts/PromptContextProvider.tsx";
 export function ImagePreview() {
 
   const { removeImageFromState, addImagesToState, images, serverAddress } = useContext(promptContext);
+
   function serverDeleteImage(imageKey : Image["key"]) {
     removeImageFromState(imageKey);
     fetch(`${serverAddress}/deleteImage`, {

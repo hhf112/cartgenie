@@ -3,41 +3,50 @@ import cloudinary from '../cloudinary.js';
 import { supabase } from "../db.js"
 
 export const imageUpload = async (req, res) => {
+  console.log("session connceted: ", req.body.session, "uploading images...");
+
   try {
-    const fileBuffer = req.file.buffer;
+    var counter = 0;
+    for (const img of req.files) {
+      const fileBuffer = img.buffer;
+      const result = await new Promise((resolve, reject) => {
+        const uploadStream = cloudinary.uploader.upload_stream(
+          { folder: 'imagePrompts' },
+          (error, result) => {
+            if (error) reject(error);
+            else resolve(result);
+          }
+        );
 
-    const result = await new Promise((resolve, reject) => {
-      const uploadStream = cloudinary.uploader.upload_stream(
-        { folder: 'imagePrompts' },
-        (error, result) => {
-          if (error) reject(error);
-          else resolve(result);
+        uploadStream.end(fileBuffer);
+      });
+
+
+      if (result) {
+        const { data, error } = await supabase
+          .from('image_uploads')
+          .insert([
+            {
+              id: result.public_id,
+              sessionToken: req.body.session,
+              url: result.url,
+            },
+          ])
+          .select()
+
+        if (error) {
+          console.log("supabase error:", error);
+          res.status(500).send("supabase record failed")
+          return;
         }
-      );
-
-      uploadStream.end(fileBuffer);
-    });
-
-
-
-    if (result) {
-      const { data, error } = await supabase
-        .from('image_uploads')
-        .insert([
-          {
-            id: result.public_id,
-            url: result.url,
-          },
-        ])
-        .select()
-
-      if (error) console.log("cloudinary error:", error);
-      else console.log(data);
-
-      res.status(200).json({ key: result.public_id });
+      }
+      counter += 1;
     }
+    console.log(`cloudinary upload: success. \t uploaded ${counter}`)
+    console.log(`supabase record: success. \t recorded ${counter}`)
+    res.status(200).send("cloudinary upload: success");
   } catch (err) {
-    console.error(err);
+    console.error("cloudinary error: ", err);
     res.status(500).json({ error: err.message || err });
   }
 };
@@ -46,9 +55,9 @@ export const deleteImage = async (req, res) => {
   try {
     const resp = await cloudinary.uploader.destroy(req.body.key, {});
     if (resp.result !== 'ok') {
-      res.status(500).send('failed to delete image');
+      res.status(500).send("cloudinary delete: failed");
     } else {
-      res.status(200).send('successfully deleted image');
+      res.status(200).send("cloudinary delete: success");
     }
   } catch (err) {
     console.error(err);

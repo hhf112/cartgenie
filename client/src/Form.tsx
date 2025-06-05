@@ -2,9 +2,11 @@ import React, { useContext } from 'react'
 import { useRef } from 'react'
 import { promptContext } from './contexts/PromptContextProvider'
 import type { promptContextType } from "./contexts/PromptContextProvider"
+import { SessionContext, type SessionContextType } from './contexts/SessionContextProvider'
 
 
 export function Form() {
+  const { sessionToken } = useContext<SessionContextType>(SessionContext);
   const promptInfo = useRef<HTMLInputElement>(null);
   const ImageInputRef = useRef<HTMLInputElement>(document.createElement("input"));
   const { resetQuery, images, addImagesToState, serverAddress } = useContext<promptContextType>(promptContext);
@@ -13,10 +15,10 @@ export function Form() {
   async function submitPrompt() {
     const formData = new FormData();
 
+    formData.append("session", sessionToken);
     for (const img of images) {
       formData.append("images", img.file);
     }
-    console.log(formData);
 
     try {
       resetQuery();

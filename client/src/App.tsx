@@ -3,7 +3,9 @@ import { Content } from "./content/Content.tsx";
 import { Form } from "./Form.tsx"
 import { ImagePreview } from './ImagePreview.tsx';
 
-import { PromptContextProvider } from "./contexts/PromptContextProvider";
+import { PromptContextProvider, promptContext, type promptContextType } from "./contexts/PromptContextProvider";
+import { useContext, useEffect } from "react";
+import { SessionContext, type SessionContextType } from "./contexts/SessionContextProvider.tsx";
 
 
 
@@ -18,14 +20,22 @@ function QueryBox() {
 }
 
 function App() {
+  const { sessionToken,  initSessionToken } = useContext(SessionContext);
+
+  useEffect(() => {
+    initSessionToken();
+  }, [])
+
+  console.log(sessionToken);
+
   return (
     <div className="flex flex-col h-screen items-center justify-end">
       <Banner />
       <div className="flex flex-col h-screen w-3/5 items-center justify-end">
         <Content />
-          <PromptContextProvider>
-            <QueryBox />
-          </PromptContextProvider>
+        <PromptContextProvider>
+          <QueryBox />
+        </PromptContextProvider>
       </div>
     </div >
   );
