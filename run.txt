@@ -1,0 +1,2 @@
+git init && git add . && git commit -m typescript rebase && git remote add origin
+ git@github.com:hhf112/cart-genie-0.1.git
