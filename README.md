@@ -11,7 +11,6 @@ currently undergoing changes.
 ## Cloud Databases integrated: 
 - [x] Cloudinary for `images`
 - [x] Supabase for `postgres` and `pgvector` integration 
-- [x] Firebase for frontend auth
 - [ ] Google AI cloud for `openAI CLIP` API
 
 ## frontend:

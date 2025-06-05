@@ -1,6 +1,7 @@
-import React, { type Dispatch } from "react";
+import React, { useContext, type Dispatch } from "react";
 import { createContext, type SetStateAction } from "react";
 import { useState } from "react";
+import { SessionContext } from "./SessionContextProvider";
 
 export const serverAddress = import.meta.env.VITE_SERVER_ADDRESS;
 
@@ -17,7 +18,7 @@ export const promptContext = createContext<promptContextType>({
   images: [],
   resetQuery: () => { },
   addImagesToState: () => [],
-  removeImageFromState: () => { }
+  removeImageFromState: () => { },
 });
 
 declare global {
@@ -36,7 +37,10 @@ interface PromptContextProviderContexts {
 export function PromptContextProvider({
   children,
 }: PromptContextProviderContexts) {
+  const { sessionToken } = useContext(SessionContext);
   const [images, setImages] = useState<Image[]>([]);
+
+
 
 
   function resetQuery() {
@@ -49,7 +53,7 @@ export function PromptContextProvider({
         file: img,
         url: URL.createObjectURL(img),
         uploaded: false,
-        key: "",
+        key: sessionToken,
       }));
       setImages((prev: Image[]): Image[] => [...prev, ...tempImages]);
 
@@ -74,7 +78,7 @@ export function PromptContextProvider({
         removeImageFromState,
         images,
         resetQuery,
-        serverAddress
+        serverAddress,
       }}
     >
       {children}
