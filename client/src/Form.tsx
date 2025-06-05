@@ -12,9 +12,11 @@ export function Form() {
 
   async function submitPrompt() {
     const formData = new FormData();
+
     for (const img of images) {
       formData.append("images", img.file);
     }
+    console.log(formData);
 
     try {
       resetQuery();

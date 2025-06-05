@@ -4,7 +4,7 @@ import { supabase } from "../db.js"
 
 export const imageUpload = async (req, res) => {
   try {
-    const fileBuffer = req.files.buffer;
+    const fileBuffer = req.file.buffer;
 
     const result = await new Promise((resolve, reject) => {
       const uploadStream = cloudinary.uploader.upload_stream(
