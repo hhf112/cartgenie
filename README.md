@@ -1,4 +1,4 @@
-Work in progress. To be continued soon.
+Work in progress. 
 - [x] Typescript remake.
 
 ## Deplyoment considerations: 
