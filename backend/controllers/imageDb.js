@@ -3,8 +3,7 @@ import cloudinary from '../cloudinary.js';
 import { supabase } from "../db.js"
 
 export const imageUpload = async (req, res) => {
-  console.log("session connceted: ", req.body.session, "uploading images...");
-
+  console.log("session: ", req.body.sessionToken);
   try {
     var counter = 0;
     for (const img of req.files) {
@@ -28,7 +27,7 @@ export const imageUpload = async (req, res) => {
           .insert([
             {
               id: result.public_id,
-              sessionToken: req.body.session,
+              sessiontoken: req.body.session,
               url: result.url,
             },
           ])

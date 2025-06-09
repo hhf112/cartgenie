@@ -3,7 +3,7 @@ Work in progress.
 
 ## Deplyoment considerations: 
 - frontend: `Vercel` (currently removed)
-- backend: `Railway` (currently removed)
+- backend: `Railway`
 
 ## Client preview
 currently undergoing changes.

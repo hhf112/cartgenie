@@ -1,7 +1,7 @@
 import React, { useContext, type Dispatch } from "react";
 import { createContext, type SetStateAction } from "react";
 import { useState } from "react";
-import { SessionContext } from "./SessionContextProvider";
+import { SessionContext, type SessionContextType } from "./SessionContextProvider";
 
 
 
@@ -39,10 +39,11 @@ export const promptContext = createContext<promptContextType>({
 
 export function PromptContextProvider({
   children,
-}: {children: React.ReactNode}) {
-  
+}: { children: React.ReactNode }) {
+
   //states
   const [images, setImages] = useState<Image[]>([]);
+  const { sessionToken } = useContext(SessionContext);
 
 
 

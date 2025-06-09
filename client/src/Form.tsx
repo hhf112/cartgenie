@@ -35,12 +35,12 @@ export function Form() {
 
 
   return (
-    <form className=" w-full border-b-gray-200 p-2 rounded-3xl shadow-xl overflow-auto " onSubmit={(e) => {
+    <form key = {sessionToken} className=" w-full border-b-gray-200 p-2 rounded-3xl shadow-xl overflow-auto " onSubmit={(e) => {
       e.preventDefault();
       submitPrompt();
     }}>
 
-      <textarea name="TextPrompt" className=" w-full resize-none focus:outline-none placeholder-gray-500 text-black h-20  overflow-auto p-2 dark:text-gray-400"
+      <textarea name="TextPrompt" className=" w-full resize-none focus:outline-none placeholder-gray-500 text-black h-10  overflow-auto p-2 dark:text-gray-400"
         placeholder="Try searching something..."
       />
 
@@ -57,7 +57,7 @@ export function Form() {
           <img src="./icons/attach.png" alt="upload images" className="w-8 h-8" />
         </button>
 
-        <button type="submit" className="w-9 h-9 mx-1"> <img src="./icons/up-arrow.png" className="w-9 cursor-pointer h-9" /> </button>
+        <button type="submit" className="w-9 h-9 mx-1"> <img src="./icons/up-arrow.png" className="w-9 cursor-pointer h-9 hover:bg-gray-200" /> </button>
       </div>
     </form >
   )

@@ -1,4 +1,5 @@
-import { Banner } from "./Banner.tsx"
+//dakr mode compatibility to be added.
+import { NavBar } from "./NavBar.tsx"
 import { Content } from "./content/Content.tsx";
 import { Form } from "./Form.tsx"
 import { ImagePreview } from './ImagePreview.tsx';
@@ -23,14 +24,14 @@ function App() {
   const { sessionToken,  initSessionToken } = useContext(SessionContext);
 
   useEffect(() => {
-    initSessionToken();
-  }, [])
+    console.log(sessionToken)
+  }, [sessionToken])
 
-  console.log(sessionToken);
+
 
   return (
-    <div className="flex flex-col h-screen items-center justify-end">
-      <Banner />
+    <div className="flex dark:bg-gray-900 flex-col h-screen  items-center justify-end">
+      <NavBar />
       <div className="flex flex-col h-screen w-3/5 items-center justify-end">
         <Content />
         <PromptContextProvider>

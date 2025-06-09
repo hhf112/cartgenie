@@ -1,4 +1,4 @@
-import { createContext, useState } from "react";
+import { createContext, useEffect, useState } from "react";
 
 //interfaces
 export interface SessionContextType {
@@ -17,6 +17,10 @@ export function SessionContextProvider({ children }: { children: React.ReactNode
   //
   //states
   const [sessionToken, setSessionToken] = useState<string>("");
+
+  useEffect(()=>{
+    initSessionToken()
+  }, []);
 
   //funcs
   function initSessionToken() {
