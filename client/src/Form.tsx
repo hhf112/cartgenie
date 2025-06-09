@@ -57,7 +57,7 @@ export function Form() {
           <img src="./icons/attach.png" alt="upload images" className="w-8 h-8" />
         </button>
 
-        <button type="submit" className="w-9 h-9 mx-1"> <img src="./icons/up-arrow.png" className="w-9 cursor-pointer h-9 hover:bg-gray-200" /> </button>
+        <button type="submit" className="w-9 h-9 mx-1"> <img src="./icons/up-arrow.png" className="w-9 cursor-pointer h-9 hover:bg-gray-200 rounded-xl" /> </button>
       </div>
     </form >
   )

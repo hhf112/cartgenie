@@ -18,7 +18,7 @@ function QueryBox() {
     <div className="flex flex-col justify-center items-center w-full">
       <ImagePreview />
       <Form />
-      <p className="mt-1 mb-2 text-xs ">Upload images for better recommendations.</p>
+      <p className="mt-1 mb-2 text-xs ">Upload an image and see the magic ✨</p>
     </div>
   );
 }
