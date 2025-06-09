@@ -1,17 +1,19 @@
-
 import React from "react"
-export function ItemCard() {
+
+interface itemCardParams {
+  itemName: string,
+  url: string,
+  site: string
+}
+export function ItemCard({itemName, url, site} : itemCardParams) {
   return (
-    <div className="rounded-2xl  border-gray-600 grow border m-4 p-3">
-      <div className="w-full flex justify-between">
-        <p className="order-2">
-          something.
-        </p>
-
-        <img src="icons/mascot.jpg" alt="mascot" className="order-1 w-10 h-10" />
-
+    <div className="shrink-0 w-1/2 flex rounded-xl justify-start items-start border border-gray-300 m-1 shadow-xl">
+      <img src={url} className={`rounded-2xl h-30 w-30  m-3`}/>
+      <div className = "shrink-0 flex flex-col justify-start items-start m-3 grow">
+      <p className = "mx-2  text-left font-semibold"> {itemName} </p>
+      <p className = "mx-2  text-left"> on {site} </p>
+      <p className = "mx-2 my-1 text-left"> buy now: <a href={url}/> </p>
       </div>
-
     </div>
   )
 

@@ -17,14 +17,14 @@ export function ImagePreview() {
 
 
   return (
-    <div className="w-full p-1  flex text-sm items-end overflow-auto" onDrop={(e) => {
+    <div className="w-full p-1 flex text-sm items-end overflow-auto" onDrop={(e) => {
       e.preventDefault();
       addImagesToState(e.dataTransfer.files);
     }} onDragOver={(e) => e.preventDefault()}>
 
       {images.map((image, index) => (
-        <div key={index} className="w-40 h-40 relative mx-1">
-           <img src={image.url} className=" rounded-xl w-40 h-40" />
+        <div key={index} className="w-30 h-30 relative mx-1 shrink-0">
+           <img src={image.url} className=" rounded-xl w-full h-full" />
           <button className="absolute top-3 right-3 cursor-pointer" type="button"
             onClick={() => removeImageFromState(image.url)} > <img src="./icons/remove.png" className="w-3  h-3" /></button>
         </div>
