@@ -12,7 +12,7 @@ currently undergoing changes.
 - [x] Cloudinary for `images`
 - [x] Supabase for `postgres` and `pgvector` database for scraped images
 - [ ] CPU demo hosting `openAI CLIP` API
-- [ ] Vercel AI SDK for  parsing text prompts
+- [ ] Vercel AI SDK for parsing text prompts
 
 ## frontend:
 React.js
