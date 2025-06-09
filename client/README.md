@@ -1,2 +1,2 @@
 - [x] Image Uploading
-- [x] Content
+- [ ] Content (integrations left)
