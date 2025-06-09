@@ -1,12 +1,15 @@
-//dakr mode compatibility to be added.
+
+import { useContext, useEffect } from "react";
+
 import { NavBar } from "./NavBar.tsx"
 import { Content } from "./content/Content.tsx";
 import { Form } from "./Form.tsx"
 import { ImagePreview } from './ImagePreview.tsx';
 
 import { PromptContextProvider, promptContext, type promptContextType } from "./contexts/PromptContextProvider";
-import { useContext, useEffect } from "react";
 import { SessionContext, type SessionContextType } from "./contexts/SessionContextProvider.tsx";
+import { ContentContextProvider } from "./contexts/ContentContextProvider.tsx";
+
 
 
 
@@ -21,10 +24,10 @@ function QueryBox() {
 }
 
 function App() {
-  const { sessionToken,  initSessionToken } = useContext(SessionContext);
+  const { sessionToken, initSessionToken } = useContext(SessionContext);
 
   useEffect(() => {
-    console.log(sessionToken)
+    console.log("new session.")
   }, [sessionToken])
 
 
@@ -33,10 +36,12 @@ function App() {
     <div className="flex dark:bg-gray-900 flex-col h-screen  items-center justify-end">
       <NavBar />
       <div className="flex flex-col h-screen w-3/5 items-center justify-end">
-        <Content />
-        <PromptContextProvider>
-          <QueryBox />
-        </PromptContextProvider>
+        <ContentContextProvider>
+          <Content />
+          <PromptContextProvider>
+            <QueryBox />
+          </PromptContextProvider>
+        </ContentContextProvider>
       </div>
     </div >
   );

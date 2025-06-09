@@ -2,7 +2,7 @@ import puppeteer from 'puppeteer'
 import { supabase } from "../db.js"
 import { spawn } from 'child_process';
 
-const [_, filename, url, cssSelector, num] = process.argv;
+const [_, filename, url, cssSelector, imglabel] = process.argv;
 
 
 function getEmbedding(imageUrl) {
@@ -73,7 +73,8 @@ await (async () => {
             {
               caption: img.alt,
               url: img.src,
-              embedding: embedding
+              embedding: embedding,
+              label: imglabel
             },
           ])
           .select()
