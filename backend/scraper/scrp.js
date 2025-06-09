@@ -5,9 +5,9 @@ import { spawn } from 'child_process';
 const [_, filename, url, cssSelector, imglabel] = process.argv;
 
 
-function getEmbedding(imageUrl) {
+export function getEmbeddingFromUrl(imageUrl) {
   return new Promise((resolve, reject) => {
-    const pythonProcess = spawn('python', ['main.py', imageUrl]);
+    const pythonProcess = spawn('python3', ['main.py', imageUrl]);
 
     let output = '';
     let errorOutput = '';
@@ -61,7 +61,7 @@ await (async () => {
       for (let img of images) {
         console.log("image found.")
         var embedding;
-        await getEmbedding(img.src)
+        await getEmbeddingFromUrl(img.src)
           .then((embeds) => {
             embedding = embeds
           })

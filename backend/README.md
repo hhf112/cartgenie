@@ -1,5 +1,3 @@
-- [ ] AI api backend
-- [x] scraper and embedder
-- [x] Cloud image database
-- [x] Supabase Postgres hosting
-
+- [x] Google colab ngrok API endpoint for CLIP embeddings (yet to test)
+- [x] Puppeteer Webscraper
+- [x] Postgres embeddings database hosted on Supabase.

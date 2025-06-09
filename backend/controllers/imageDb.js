@@ -7,45 +7,9 @@ export const imageUpload = async (req, res) => {
   try {
     var counter = 0;
     for (const img of req.files) {
-      const fileBuffer = img.buffer;
-      const result = await new Promise((resolve, reject) => {
-        const uploadStream = cloudinary.uploader.upload_stream(
-          { folder: 'imagePrompts' },
-          (error, result) => {
-            if (error) reject(error);
-            else resolve(result);
-          }
-        );
 
-        uploadStream.end(fileBuffer);
-      });
-
-
-      if (result) {
-        const { data, error } = await supabase
-          .from('image_uploads')
-          .insert([
-            {
-              id: result.public_id,
-              sessiontoken: req.body.session,
-              url: result.url,
-            },
-          ])
-          .select()
-
-        if (error) {
-          console.log("supabase error:", error);
-          res.status(500).send("supabase record failed")
-          return;
-        }
-      }
-      counter += 1;
     }
-    console.log(`cloudinary upload: success. \t uploaded ${counter}`)
-    console.log(`supabase record: success. \t recorded ${counter}`)
-    res.status(200).send("cloudinary upload: success");
   } catch (err) {
-    console.error("cloudinary error: ", err);
     res.status(500).json({ error: err.message || err });
   }
 };
@@ -120,3 +84,47 @@ export const deleteImage = async (req, res) => {
 //   ],
 //   "api_key": "614335564976464"
 // }
+  //
+//      DEPRACATED
+  //      const fileBuffer = img.buffer;
+    //   const result = await new Promise((resolve, reject) => {
+    //     const uploadStream = cloudinary.uploader.upload_stream(
+    //       { folder: 'imagePrompts' },
+    //       (error, result) => {
+    //         if (error) reject(error);
+    //         else resolve(result);
+    //       }
+    //     );
+    //
+    //     uploadStream.end(fileBuffer);
+    //   });
+    //
+    //
+    //   if (result) {
+    //     const { data, error } = await supabase
+    //       .from('image_uploads')
+    //       .insert([
+    //         {
+    //           id: result.public_id,
+    //           sessiontoken: req.body.session,
+    //           url: result.url,
+    //         },
+    //       ])
+    //       .select()
+    //
+    //     if (error) {
+    //       console.log("supabase error:", error);
+    //       res.status(500).send("supabase record failed")
+    //       return;
+    //     } else {
+    //       res.send(200).json({
+    //
+    //       })
+    //     }
+    //   }
+    //   counter += 1;
+    //
+    //
+    // console.log(`cloudinary upload: success. \t uploaded ${counter}`)
+    // console.log(`supabase record: success. \t recorded ${counter}`)
+    // res.status(200).send("cloudinary upload: success");
