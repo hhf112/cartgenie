@@ -41,7 +41,7 @@ export function Form() {
     }}>
 
       <textarea name="TextPrompt" className=" w-full resize-none focus:outline-none placeholder-gray-500 text-black h-10  overflow-auto p-2 dark:text-gray-400"
-        placeholder="Try searching something..."
+        placeholder="Describe your ideas for better results..."
       />
 
 

@@ -1,6 +1,5 @@
 import React, { useContext, type Dispatch } from "react";
-import { createContext, type SetStateAction } from "react";
-import { useState } from "react";
+import { createContext, useState, type SetStateAction } from "react";
 import { SessionContext, type SessionContextType } from "./SessionContextProvider";
 
 
@@ -27,6 +26,7 @@ export interface promptContextType {
   removeImageFromState: (imageKey: string) => void,
 }
 
+
 //init context
 export const promptContext = createContext<promptContextType>({
   serverAddress: "",
@@ -43,7 +43,9 @@ export function PromptContextProvider({
 
   //states
   const [images, setImages] = useState<Image[]>([]);
-  const { sessionToken } = useContext(SessionContext);
+  const [appState, setAppState] = useState<string>("prompt")
+
+  const { sessionToken } = useContext<SessionContextType>(SessionContext);
 
 
 
