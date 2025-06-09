@@ -1,3 +1,3 @@
-- [x] Google colab ngrok API endpoint for CLIP embeddings (yet to test)
+- [ ] Google colab ngrok API endpoint for CLIP embeddings (yet to test)
 - [x] Puppeteer Webscraper
 - [x] Postgres embeddings database hosted on Supabase.
