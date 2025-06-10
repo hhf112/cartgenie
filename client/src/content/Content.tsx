@@ -7,7 +7,6 @@ import { contentContext, type Product, type contentContextType, type contentType
 
 export function Content() {
   const { fetching, content, setContent } = useContext<contentContextType>(contentContext);
-  const { images } = useContext(promptContext);
   return (
 
     <div className="flex grow flex-col w-full justify-end items-center m-2">
@@ -29,7 +28,7 @@ export function Content() {
               <div className="flex w-full justify-end items-start">
                 <div className="rounded-2xl bg-gray-100">
                   <div className="flex w-full items-center rounded-2xl overflow-auto m-2">
-                    {images.map(img => <img src={img.url} className="h-25 w-25 m-3 rounded-2xl" />)}
+                    {cont.imgs.map(img => <img src={img.url} className="h-25 w-25 m-3 rounded-2xl" />)}
                   </div>
                   <p className="text-left m-3"> user text prompt </p>
                 </div>

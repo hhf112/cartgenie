@@ -1,4 +1,4 @@
-import React, { createContext, useState, type Dispatch, type ReactNode } from "react";
+import React, { createContext, useState, type Dispatch, type ReactNode, type SetStateAction } from "react";
 
 
 export interface Product {
@@ -12,11 +12,12 @@ export interface contentType {
   label: string,
   text: string,
   products: Product[]
+  imgs: Image[]
 }
 
 export interface contentContextType {
   content: contentType[]
-  setContent: Dispatch<contentType[]>,
+  setContent: Dispatch<SetStateAction<contentType[]>>,
   fetching: boolean
 }
 export const contentContext = createContext<contentContextType>({
