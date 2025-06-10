@@ -1,11 +1,4 @@
-Work in progress.
-- [x] Typescript remake.
+Work in progress. To be deployed by June 12, 2025.
 
-## Deplyoment considerations: 
-- frontend: `Vercel` 
-- backend: `Railway`
-
-## Client preview
-currently undergoing changes.
 
 
