@@ -4,7 +4,9 @@ import requests
 from io import BytesIO
 from sentence_transformers import SentenceTransformer
 from PIL import Image
+from transformers import logging
 
+logging.set_verbosity_error()
 
 model = SentenceTransformer('clip-ViT-B-32')
 
