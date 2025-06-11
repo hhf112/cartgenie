@@ -4,17 +4,7 @@ import { promptContext } from "./contexts/PromptContextProvider.tsx";
 
 export function ImagePreview() {
 
-  const { removeImageFromState, addImagesToState, images, serverAddress } = useContext(promptContext);
-
-  function serverDeleteImage(imageKey : Image["key"]) {
-    removeImageFromState(imageKey);
-    fetch(`${serverAddress}/deleteImage`, {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ key: imageKey })
-    })
-  }
-
+  const { removeImageFromState, addImagesToState, images } = useContext(promptContext);
 
   return (
     <div className="w-full p-1 flex text-sm items-end overflow-auto" onDrop={(e) => {

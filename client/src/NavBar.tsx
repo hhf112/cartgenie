@@ -16,7 +16,7 @@ export function NavBar() {
 
 
       {/* meta */}
-      < div title="Learn More" className="cursor-pointer font-semibold text-xl text-gray-900 m-1 hover:bg-gray-200  px-2 py-3 rounded-xl text-center flex items-center"> CartGenie</div>
+      < div title="Learn More" className="cursor-pointer font-semibold text-xl text-neutral-900 m-1 hover:bg-gray-200  px-2 py-3 rounded-xl text-center flex items-center"> CartGenie</div>
     </div >
   )
 

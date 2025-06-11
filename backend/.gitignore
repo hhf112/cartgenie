@@ -1,2 +1,4 @@
+newenv/
+testrun/
 .env
 node_modules
