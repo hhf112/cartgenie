@@ -1,5 +1,5 @@
-import React, { useContext, type Dispatch } from "react";
-import { createContext, useState, type SetStateAction } from "react";
+// import React, { useContext, type Dispatch } from "react";
+import { createContext, useState, type SetStateAction , useContext} from "react";
 import { SessionContext, type SessionContextType } from "./SessionContextProvider";
 
 
@@ -14,12 +14,10 @@ declare global {
   }
 }
 
-export const serverAddress = import.meta.env.VITE_SERVER_ADDRESS;
 
 
 //interfaces
 export interface promptContextType {
-  serverAddress: string,
   images: Image[],
   resetQuery: () => void,
   addImagesToState: (fileArray: FileList | null) => Image[],
@@ -29,7 +27,6 @@ export interface promptContextType {
 
 //init context
 export const promptContext = createContext<promptContextType>({
-  serverAddress: "",
   images: [],
   resetQuery: () => { },
   addImagesToState: () => [],
@@ -85,7 +82,6 @@ export function PromptContextProvider({
         removeImageFromState,
         images,
         resetQuery,
-        serverAddress,
       }}
     >
       {children}

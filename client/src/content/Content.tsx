@@ -10,11 +10,12 @@ export function Content() {
   return (
 
     <div className="flex grow flex-col w-full justify-end items-center m-2">
+
       {content.length ? (
         content.map((cont: contentType) => {
           if (cont.label == "content") {
             return (
-              <div className="w-full m-1">
+              <div className="w-full m-2">
                 <p> here is what I found! </p>
                 <div className="flex w-full items-center rounded-2xl overflow-auto m-2">
                   {cont.products.map(prod => <ItemCard itemName={prod.title} imageUrl={prod.imageUrl} url={prod.url} site={prod.site} />)}
@@ -25,12 +26,12 @@ export function Content() {
 
           else if (cont.label == "memo") {
             return (
-              <div className="flex w-full justify-end items-start">
+              <div className="flex w-full justify-end items-start m-2">
                 <div className="rounded-2xl bg-gray-100">
-                  <div className="flex w-full items-center rounded-2xl overflow-auto m-2">
-                    {cont.imgs.map(img => <img src={img.url} className="h-25 w-25 m-3 rounded-2xl" />)}
+                  <div className="flex w-full items-center rounded-xl overflow-auto m-1">
+                    {cont.imgs.map(img => <img src={img.url} className="h-25 w-25 m-2 rounded-2xl" />)}
                   </div>
-                  <p className="text-left m-3"> user text prompt </p>
+                  <p className="text-left my-2 mx-3"> {cont.text} </p>
                 </div>
               </div>
             )
@@ -38,7 +39,7 @@ export function Content() {
 
         })
       ) : (
-        <h1 className="text-2xl font-semibold text-gray-700"> Welcome to Cart Genie! </h1>
+        <h1 className="text-2xl font-semibold text-neutral-800"> Welcome to Cart Genie! </h1>
       )
       }
 

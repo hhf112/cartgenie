@@ -18,12 +18,14 @@ export interface contentType {
 export interface contentContextType {
   content: contentType[]
   setContent: Dispatch<SetStateAction<contentType[]>>,
-  fetching: boolean
+  fetching: boolean,
+  setFetching: Dispatch<SetStateAction<boolean>>
 }
 export const contentContext = createContext<contentContextType>({
   content: [],
-  setContent: (prev) => {},
-  fetching: false
+  setContent: (prev) => [],
+  fetching: false,
+  setFetching: () => {}
 })
 
 
@@ -31,11 +33,13 @@ export function ContentContextProvider({children} : {children: React.ReactNode})
   const [content, setContent] = useState<contentType[]>([])
   const [fetching, setFetching] = useState<boolean>(false);
 
+
   return (
   <contentContext.Provider value = {{
       setContent,
       content,
-      fetching
+      fetching,
+      setFetching
     }}>
 
     {children}

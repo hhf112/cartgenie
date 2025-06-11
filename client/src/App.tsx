@@ -33,7 +33,7 @@ function App() {
 
 
   return (
-    <div className="flex dark:bg-gray-900 flex-col h-screen  items-center justify-end">
+    <div className="flex  flex-col h-screen  items-center justify-end">
       <NavBar />
       <div className="flex flex-col h-screen w-3/5 items-center justify-end">
         <ContentContextProvider>

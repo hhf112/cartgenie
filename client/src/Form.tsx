@@ -11,18 +11,16 @@ export function Form() {
   const promptInfo = useRef<HTMLInputElement>(null);
   const ImageInputRef = useRef<HTMLInputElement>(document.createElement("input"));
   const UserInputRef = useRef<HTMLTextAreaElement>(document.createElement("textarea"));
-  const { resetQuery, images, addImagesToState, serverAddress } = useContext<promptContextType>(promptContext);
-  const { setContent } = useContext<contentContextType>(contentContext)
+  const { resetQuery, images, addImagesToState,} = useContext<promptContextType>(promptContext);
+  const { setContent , fetching, setFetching} = useContext<contentContextType>(contentContext)
+
 
 
   async function submitPrompt() {
     const formData = new FormData();
-
     formData.append("session", sessionToken);
-    for (const img of images) {
-      formData.append("images", img.file);
-    }
-
+    
+    images.forEach(img => formData.append("images", img.file));
     try {
       setContent((prev: contentType[]) => [...prev, {
         label: "memo",
@@ -30,14 +28,39 @@ export function Form() {
         products: [],
         imgs: images
       }])
+
       resetQuery();
 
-      const req = await fetch(`${serverAddress}/upload`, {
+      setFetching(true);
+      const query = await fetch(`${import.meta.env.VITE_SERVERADDRESS}/upload`, {
         method: "POST",
         body: formData
       })
+
+      const results = await query.json();
+
+      const display : contentType = {
+        label : "content",
+        text: "this is what I found!",
+        products: [],
+        imgs: []
+      }
+
+      results.results.rows.forEach((row : {
+        url : string,
+        caption: string,
+        product_url: string,
+      }) => {
+          display.products.push({
+            title: row.caption,
+            url: row.product_url,
+            site: "amazon",
+            imageUrl: row.url
+          })
+      })
+      setFetching(false)
+      setContent((prev: contentType[]) => [...prev, display]);
     } catch (err) {
-      alert("failed to upload images!\n");
       console.log(err);
       return;
     }
@@ -50,7 +73,7 @@ export function Form() {
       submitPrompt();
     }}>
 
-      <textarea ref = {UserInputRef} name="TextPrompt" className=" w-full resize-none focus:outline-none placeholder-gray-500 text-black h-10  overflow-auto p-2 dark:text-gray-400"
+      <textarea ref={UserInputRef} name="TextPrompt" className=" w-full resize-none focus:outline-none placeholder-gray-500 text-black h-10  overflow-auto p-2 "
         placeholder="Describe your ideas for better results..."
       />
 
