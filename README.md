@@ -1,4 +1,4 @@
-Work in progress. To be deployed by June 12, 2025 EOD.
+Work in progress. To be finished by June 12, 2025 EOD. 
 
 
 
