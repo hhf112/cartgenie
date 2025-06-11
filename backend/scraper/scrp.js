@@ -5,29 +5,6 @@ import "dotenv/config"
 
 
 async function getEmbeddingFromUrl(imageUrl) {
-  // return new Promise((resolve, reject) => {
-  //   const pythonProcess = spawn('python3', ['main.py', imageUrl]);
-  //
-  //   let output = '';
-  //
-  //   pythonProcess.stdout.on('data', (data) => {
-  //     output += data.toString();
-  //   });
-  //
-  //   pythonProcess.on('close', (code) => {
-  //     if (code !== 0) {
-  //       reject(new Error(`Python exited with code ${code}`));
-  //     } else {
-  //       try {
-  //         const embedding = JSON.parse(output);
-  //         resolve(embedding);
-  //       } catch (err) {
-  //         reject(new Error(`Failed to parse JSON: ${err.message}`));
-  //       }
-  //     }
-  //   });
-  // });
-  //
   try {
     const resp = await fetch(`${process.env.NGROK_URL}/upload`, {
       method: "POST",
