@@ -10,7 +10,7 @@ export function Form() {
   const { sessionToken } = useContext<SessionContextType>(SessionContext);
   const promptInfo = useRef<HTMLInputElement>(null);
   const ImageInputRef = useRef<HTMLInputElement>(document.createElement("input"));
-  const UserInputRef = useRef<HTMLTextAreaElement>(document.createElement("textarea"));
+  const TextInputRef = useRef<HTMLTextAreaElement>(document.createElement("textarea"));
   const { resetQuery, images, addImagesToState, } = useContext<promptContextType>(promptContext);
   const { setContent, fetching, setFetching } = useContext<contentContextType>(contentContext)
 
@@ -19,12 +19,15 @@ export function Form() {
   async function submitPrompt() {
     const formData = new FormData();
     formData.append("session", sessionToken);
+    const prompt = TextInputRef.current.value
+    TextInputRef.current.value = "";
 
+    formData.append("text", prompt);
     images.forEach(img => formData.append("images", img.file));
     try {
       setContent((prev: contentType[]) => [...prev, {
         label: "memo",
-        text: UserInputRef.current.value,
+        text: TextInputRef.current.value,
         products: [],
         imgs: images
       }])
@@ -111,7 +114,7 @@ export function Form() {
       // dummySubmit()
     }}>
 
-      <textarea ref={UserInputRef} name="TextPrompt" className=" w-full resize-none focus:outline-none placeholder-gray-500 text-black h-10  overflow-auto p-2 "
+      <textarea ref={TextInputRef} name="TextPrompt" className=" w-full resize-none focus:outline-none placeholder-gray-500 text-black h-10  overflow-auto p-2 "
         placeholder="Describe your ideas for better results..."
       />
 
