@@ -17,6 +17,9 @@ app.use(cors());
 const storage = multer.memoryStorage();
 const upload = multer({ storage: storage });
 
+app.get('/', (req,res) => {
+  res.status(200).send("working")
+})
 app.use('/', imageServer);
 
 try {
