@@ -1,3 +1,5 @@
+import FormData from "form-data"
+import fetch from "node-fetch"
 import { supabase } from "../db.js"
 import { pg } from '../db.js';
 import "dotenv/config.js"
@@ -25,6 +27,7 @@ export const search = async (req, res) => {
       "huggingFace": err,
       "error": "failed to generate embeddings"
     })
+    return;
   }
 
   try {
