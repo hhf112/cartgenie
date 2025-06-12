@@ -6,19 +6,16 @@ export const search = async (req, res) => {
   const data = new FormData();
   if (req.file) data.append("images", req.file);
   if (req.files) {
-    for (const img in req.files) {
+    for (const img of req.files) {
       data.append("images", img);
     }
   }
   if (req.body.text) data.append("text", req.body.text);
 
-  var embedding;
+  let embedding;
   try {
     const resp = await fetch(`${process.env.HUGGINGFACE_URL}/upload`, {
       method: "POST",
-      headers: {
-        "Content-type": "multipart/form-data"
-      },
       body: data
     })
 
@@ -29,7 +26,6 @@ export const search = async (req, res) => {
       "error": "failed to generate embeddings"
     })
   }
-
 
   try {
     let product = await pg.query(`SELECT category FROM labels ORDER BY embedding <-> '[${embedding}]' LIMIT 1;`);
