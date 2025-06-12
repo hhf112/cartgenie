@@ -9,7 +9,7 @@ export const search = async (req, res) => {
   data.append("text", req.body.text);
 
   try {
-    const resp = await fetch(`${process.env.NGROK_URL}/upload`, {
+    const resp = await fetch(`${process.env.HUGGINGFACE_URL}/upload`, {
       method: "POST",
       heaaders: {
         "Content-type": "multipart/form-data"
