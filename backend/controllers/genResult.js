@@ -4,10 +4,21 @@ import { pg } from '../db.js';
 import "dotenv/config.js"
 
 export const search = async (req, res) => {
-  const data = new FormData();
-  if (req.files) data.append("images", req.files);
-  data.append("text", req.body.text);
+  if ((req.files.length == 0) && (!req.body.text)) {
+    res.status(404).json({
+      "error" : "no data attached."
+    })
+    return;
+  }
 
+  const data = new FormData();
+  if (req.files) data.append("images", req.files)
+  if (req.body.text) data.append("text", req.body.text);
+
+  if (data = {}) 
+
+
+  var embeddings;
   try {
     const resp = await fetch(`${process.env.HUGGINGFACE_URL}/upload`, {
       method: "POST",
@@ -17,9 +28,16 @@ export const search = async (req, res) => {
       body: data
     })
 
-    const embedding = await resp.json();
+    embedding = await resp.json()
+  } catch (err) {
+    console.log(err)
+    res.status(500).json({
+      "error": "failed to generate embeddings"
+    })
+  }
 
 
+  try {
     let product = await pg.query(`SELECT category FROM labels ORDER BY embedding <-> '[${embedding}]' LIMIT 1;`);
     product = product.rows[0].category;
 
@@ -27,13 +45,11 @@ export const search = async (req, res) => {
     category = category.rows[0].category;
 
     const result = await pg.query(`SELECT url, caption, product_url FROM products WHERE label = ${category} ORDER BY embedding <-> '[${embedding}]' LIMIT 5;`);
-    res.status(200).json({
-      results: result
-    })
-    console.log("search process finsihed succcessfully.")
+    res.status(200).json(result)
+    console.log("request served")
   } catch (error) {
     console.log(error);
-    res.status(500).send("failed to fetch results.")
+    res.status(500).send("request failed")
   }
 };
 
