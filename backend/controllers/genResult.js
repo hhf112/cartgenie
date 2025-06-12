@@ -11,7 +11,7 @@ export const search = async (req, res) => {
     let product = await pg.query(`SELECT category FROM labels ORDER BY embedding <-> '[${embedding}]' LIMIT 1;`);
     product = product.rows[0].category;
 
-    let category = await pg.query(`SELECT category FROM ${product} ORDER BY embedding <-> '[${embedding}]' LIMIT 1;`)
+    let category = await pg.query(`SELECT category FROM '${product}' ORDER BY embedding <-> '[${embedding}]' LIMIT 1;`)
     category = category.rows[0].category;
 
     const result = await pg.query(`SELECT url, caption, product_url FROM products WHERE label = '${category}' ORDER BY embedding <-> '[${embedding}]' LIMIT 5;`);
