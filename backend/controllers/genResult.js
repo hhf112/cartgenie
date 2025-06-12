@@ -16,7 +16,7 @@ export const search = async (req, res) => {
   try {
     const resp = await fetch(`${process.env.HUGGINGFACE_URL}/upload`, {
       method: "POST",
-      heaaders: {
+      headers: {
         "Content-type": "multipart/form-data"
       },
       body: data
