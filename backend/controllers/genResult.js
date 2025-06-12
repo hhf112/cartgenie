@@ -1,4 +1,3 @@
-import { response } from 'express';
 import { supabase } from "../db.js"
 import { pg } from '../db.js';
 import "dotenv/config.js"
