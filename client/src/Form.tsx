@@ -20,7 +20,6 @@ export function Form() {
     const formData = new FormData();
     formData.append("session", sessionToken);
     const prompt = TextInputRef.current.value
-    TextInputRef.current.value = "";
 
     formData.append("text", prompt);
     images.forEach(img => formData.append("images", img.file));
@@ -32,6 +31,8 @@ export function Form() {
         imgs: images
       }])
 
+
+      TextInputRef.current.value = "";
       resetQuery();
 
       setFetching(true);
@@ -45,9 +46,9 @@ export function Form() {
       const embeds = await getEmbeddings.json();
 
       const results = await fetch(`${import.meta.env.VITE_RESADDR}/upload`, {
-        method:"POST",
+        method: "POST",
         headers: {
-          "Content-type" : "application/json",
+          "Content-type": "application/json",
         },
         body: JSON.stringify({
           embeddings: embeds

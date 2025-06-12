@@ -1,4 +1,5 @@
-- [x] HuggingFace jupyter notebook hosting
+- [x] railway host
+- [x] HuggingFace jupyter notebook host
 - [x] Local API endpoint to return image results.
 - [x] Puppeteer Webscraper
 - [x] Postgres embeddings database hosted on Supabase.
