@@ -9,8 +9,7 @@ const storage = multer.memoryStorage();
 const upload = multer({ storage: storage });
 
 // router.post('/upload', upload.array("images"), imageUpload);
-router.post('/upload', upload.array("images"), search);
-router.post('/uploadtext', search);
+router.post('/upload', search);
 
 export default router;
 
