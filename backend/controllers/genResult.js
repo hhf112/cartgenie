@@ -6,13 +6,13 @@ export const search = async (req, res) => {
   const data = new FormData();
   if (req.file) data.append("images", req.file);
   if (req.files) {
-    for (img in req.files) {
+    for (const img in req.files) {
       data.append("images", img);
     }
   }
   if (req.body.text) data.append("text", req.body.text);
 
-  var embeddings;
+  var embedding;
   try {
     const resp = await fetch(`${process.env.HUGGINGFACE_URL}/upload`, {
       method: "POST",
