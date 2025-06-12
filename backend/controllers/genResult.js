@@ -6,7 +6,11 @@ import "dotenv/config.js"
 export const search = async (req, res) => {
   const data = new FormData();
   if (req.file) data.append("images", req.file);
-  if (req.files) data.append("images", req.files);
+  if (req.files) {
+    for (img in req.files) {
+      data.append("images", img);
+    }
+  }
   if (req.body.text) data.append("text", req.body.text);
 
   var embeddings;
@@ -22,7 +26,7 @@ export const search = async (req, res) => {
     embedding = await resp.json()
   } catch (err) {
     res.status(500).json({
-      "huggingFace" : err,
+      "huggingFace": err,
       "error": "failed to generate embeddings"
     })
   }
