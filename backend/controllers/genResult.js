@@ -4,19 +4,10 @@ import { pg } from '../db.js';
 import "dotenv/config.js"
 
 export const search = async (req, res) => {
-  if ((req.files.length == 0) && (!req.body.text)) {
-    res.status(404).json({
-      "error" : "no data attached."
-    })
-    return;
-  }
-
   const data = new FormData();
-  if (req.files) data.append("images", req.files)
+  if (req.file) data.append("images", req.file);
+  if (req.files) data.append("images", req.files);
   if (req.body.text) data.append("text", req.body.text);
-
-  if (data = {}) 
-
 
   var embeddings;
   try {
@@ -30,8 +21,8 @@ export const search = async (req, res) => {
 
     embedding = await resp.json()
   } catch (err) {
-    console.log(err)
     res.status(500).json({
+      "huggingFace" : err,
       "error": "failed to generate embeddings"
     })
   }
