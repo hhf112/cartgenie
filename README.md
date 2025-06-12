@@ -1,4 +1,4 @@
-Work in progress. To be finished by June 12, 2025 EOD. 
+deployed <br>
+![demo](./assets/demo.gif)
 
-
-
+documentation to be added soon. App is still under experimentatio for more accurate results.

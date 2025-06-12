@@ -1,4 +1,4 @@
-- [x] Google colab with ngrok API endpoint for CLIP embeddings 
+- [x] HuggingFace jupyter notebook hosting
 - [x] Local API endpoint to return image results.
 - [x] Puppeteer Webscraper
 - [x] Postgres embeddings database hosted on Supabase.
