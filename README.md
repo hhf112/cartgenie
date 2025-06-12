@@ -1,2 +1,2 @@
 deployed.
-<img src="./assets/demo.gif">
+![demo](./assets/demo.gif)
