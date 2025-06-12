@@ -29,7 +29,7 @@ export function Content() {
               <div className="flex w-full justify-end items-start m-2">
                 <div className="rounded-2xl bg-gray-100">
                   <div className="flex w-full items-center rounded-xl overflow-auto m-1">
-                    {cont.imgs.map(img => <img src={img.url} className="h-25 w-25 m-2 rounded-2xl" />)}
+                    {cont.imgs.map(img => <img src={img.url} className="h-25 w-25 m-2 rounded-2xl object-cover" />)}
                   </div>
                   <p className="text-left my-2 mx-3"> {cont.text} </p>
                 </div>
