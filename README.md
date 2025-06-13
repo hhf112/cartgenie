@@ -1,5 +1,5 @@
 deployed (for further info check respective folders) <br>
-<!-- ![Vercel Status](https://img.shields.io/badge/Vercel-live-light_green)  -->
+![Vercel Status](https://img.shields.io/badge/Vercel-live-light_green) 
 
 ![demo](./assets/demo.gif) 
 PS: the Huggingface space was running slow while I recorded this. lol.
