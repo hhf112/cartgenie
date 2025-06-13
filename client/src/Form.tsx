@@ -26,15 +26,15 @@ export function Form() {
     try {
       setContent((prev: contentType[]) => [...prev, {
         label: "memo",
-        text: TextInputRef.current.value,
+        text: prompt,
         products: [],
         imgs: images
       }])
 
-
       TextInputRef.current.value = "";
-      resetQuery();
 
+
+      resetQuery();
       setFetching(true);
       const getEmbeddings = await fetch(`${import.meta.env.VITE_EMBEDADRR}/upload`, {
         method: "POST",
@@ -116,7 +116,7 @@ export function Form() {
     }}>
 
       <textarea ref={TextInputRef} name="TextPrompt" className=" w-full resize-none focus:outline-none placeholder-gray-500 text-black h-10  overflow-auto p-2 "
-        placeholder="Describe your ideas for better results..."
+        placeholder="Describe your ideas for better results..." 
       />
 
 
