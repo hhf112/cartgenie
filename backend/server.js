@@ -5,7 +5,7 @@ import express from 'express';
 import FormData from "form-data";
 import fetch from "node-fetch"
 
-import { supabase } from "../db.js"
+import { supabase } from "./db.js"
 import { pg } from "./db.js";
 const app = express();
 
@@ -26,14 +26,13 @@ app.use(cors());
 const search = async (req, res) => {
   try {
     const embedding = req.body.embeddings;
-    let product = await pg.query(`SELECT category FROM labels ORDER BY embedding <-> '[${embedding}]' LIMIT 1;`);
-    product = product.rows[0].category;
+    
+    //uses ivvflat indexing
+    const result = await pg.query(`SELECT url, caption, product_url FROM products ORDER BY embedding <-> '[${embedding}]' LIMIT 5;`);
 
-    let category = await pg.query(`SELECT category FROM ${product} ORDER BY embedding <-> '[${embedding}]' LIMIT 1;`)
-    category = category.rows[0].category;
-    console.log(category)
+    //uses non indexed embedding
+    // const result = await pg.query(`SELECT url, caption, product_url FROM products ORDER BY noindex <-> '[${embedding}]' LIMIT 5;`);
 
-    const result = await pg.query(`SELECT url, caption, product_url FROM products WHERE label = '${category}' ORDER BY embedding <-> '[${embedding}]' LIMIT 5;`);
     res.status(200).json(result)
     console.log("request served")
   } catch (error) {
