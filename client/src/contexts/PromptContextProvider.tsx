@@ -1,7 +1,6 @@
 // import React, { useContext, type Dispatch } from "react";
-import { createContext, useState, type SetStateAction , useContext} from "react";
+import { createContext, useState, type SetStateAction , useContext, useRef, type RefObject, type Ref} from "react";
 import { SessionContext, type SessionContextType } from "./SessionContextProvider";
-
 
 
 //globals
@@ -14,12 +13,10 @@ declare global {
   }
 }
 
-
-
 //interfaces
 export interface promptContextType {
   images: Image[],
-  resetQuery: () => void,
+  resetQuery: (textbox: RefObject<HTMLTextAreaElement> ) => void,
   addImagesToState: (fileArray: FileList | null) => Image[],
   removeImageFromState: (imageKey: string) => void,
 }
@@ -28,7 +25,7 @@ export interface promptContextType {
 //init context
 export const promptContext = createContext<promptContextType>({
   images: [],
-  resetQuery: () => { },
+  resetQuery: (textbox: RefObject<HTMLTextAreaElement>) => { },
   addImagesToState: () => [],
   removeImageFromState: () => { },
 });
@@ -47,7 +44,8 @@ export function PromptContextProvider({
 
 
   //funcs
-  function resetQuery() {
+  function resetQuery(textbox: RefObject<HTMLTextAreaElement>) {
+    textbox.current.value = ""
     setImages([]);
   }
 

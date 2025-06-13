@@ -2,11 +2,12 @@ import { ItemCard } from "./ItemCard.tsx";
 import React, { useContext, useState } from "react";
 import { promptContext, PromptContextProvider, type promptContextType } from "../contexts/PromptContextProvider";
 
-import { contentContext, type Product, type contentContextType, type contentType } from "../contexts/ContentContextProvider.tsx";
+import { contentContext, type waitingMessage,   type Product, type contentContextType, type contentType } from "../contexts/ContentContextProvider.tsx";
+
 
 
 export function Content() {
-  const { fetching, content, setContent } = useContext<contentContextType>(contentContext);
+  const { waiting, content} = useContext<contentContextType>(contentContext);
   return (
     <div className="flex flex-col h-full overflow-y-auto w-full  min-w-0 overflow-x-hidden justify-start items-center  my-3 px-4">
       {content.length ? (
@@ -15,7 +16,7 @@ export function Content() {
             return (
               <div className="w-full my-1">
                 {/*will possibly return highest similarity score found here*/}
-                <p> here is what I found! </p>
+                <p> {cont.text} </p>
                 <div className="flex w-full items-center rounded-2xl overflow-auto mx-1 my-1">
                   {cont.products.map(prod => <ItemCard itemName={prod.title} imageUrl={prod.imageUrl} url={prod.url} site={prod.site} />)}
                 </div>
@@ -42,7 +43,7 @@ export function Content() {
       )
       }
 
-      {fetching && <h1 className="animate-pulse text-gray-600"> fetching results ... </h1>}
+      {waiting.on && <h1 className="animate-pulse text-gray-600"> {waiting.text} </h1>}
     </div>
   )
 }
