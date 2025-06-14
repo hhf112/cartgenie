@@ -1,10 +1,9 @@
 currently not under active development
 <center>
-<h1> CartGenie 0.1 <img src = "https://img.shields.io/badge/Vercel-live-light_green" alt = "Vercel Status" /> </h1> 
-<h3> Automated search for you to find those matching pairs!</h3>
-simpy attach an image optionally followed by a further description of your desire 
+    <h1> CartGenie 0.1 <img src = "https://img.shields.io/badge/Vercel-live-light_green" alt = "Vercel Status" /> </h1> 
+    <h3> Automated search for you to find those matching pairs!</h3>
 </center>
-
+simpy attach an image optionally followed by a further description of your desire 
 ![demo](./assets/demo.gif) 
 PS: the Huggingface space was running slow while I recorded this.
 
