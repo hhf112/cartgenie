@@ -10,7 +10,7 @@ PS: the Huggingface space was running slow while I recorded this. lol.
 ## Disclaimer ⚠️
 This is a demo client based over limited scraping data. No user data is collected and persistantly stored without user consent in any form under any context.
 
-Experimentation is still be ongoing to improve the accuracy of the tool. 
+Experimentation is ongoing to improve the accuracy of the tool. 
 
 ## Upcoming features
 - Past chat history
