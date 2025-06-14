@@ -1,5 +1,5 @@
 ## CartGenie 0.1 <br>
-![Vercel Status](https://img.shields.io/badge/Vercel-live-green)
+![Vercel Status](https://img.shields.io/badge/Vercel-live-green) <br>
 search over a database of amazon products using images and prompts.
 ![demo](./assets/demo.gif) 
 
