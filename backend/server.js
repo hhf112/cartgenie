@@ -27,11 +27,8 @@ const search = async (req, res) => {
   try {
     const embedding = req.body.embeddings;
     
-    //uses ivvflat indexing
-    const result = await pg.query(`SELECT url, caption, product_url FROM products ORDER BY embedding <-> '[${embedding}]' LIMIT 5;`);
+    const result = await pg.query(`SELECT url, caption, product_url FROM products ORDER BY noindex <-> '[${embedding}]' LIMIT 5;`);
 
-    //uses non indexed embedding
-    // const result = await pg.query(`SELECT url, caption, product_url FROM products ORDER BY noindex <-> '[${embedding}]' LIMIT 5;`);
 
     res.status(200).json(result)
     console.log("request served")
