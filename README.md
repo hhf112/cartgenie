@@ -1,3 +1,4 @@
+currently not under active development
 <center>
 <h1> CartGenie 0.1 <img src = "https://img.shields.io/badge/Vercel-live-light_green" alt = "Vercel Status" /> </h1> 
 <h3> Automated search for you to find those matching pairs!</h3>
@@ -10,9 +11,7 @@ PS: the Huggingface space was running slow while I recorded this. lol.
 ## Disclaimer ⚠️
 This is a demo client based over limited scraping data. No user data is collected and persistantly stored without user consent in any form under any context.
 
-Experimentation is ongoing to improve the accuracy of the tool. 
-
-## Upcoming features
+## Future features
 - Past chat history
 - Live price fetching
 
