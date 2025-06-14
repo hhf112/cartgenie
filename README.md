@@ -1,24 +1,17 @@
-currently not under active development
-<p align = "center">
-    <h1> CartGenie 0.1 <img src = "https://img.shields.io/badge/Vercel-live-light_green" alt = "Vercel Status" /> </h1> 
-    <h3> Automated search for you to find those matching pairs!</h3>
-</p>
-
-
-simpy attach an image optionally followed by a further description of your desire 
-
+## CartGenie 0.1 
+search over a database of amazon products using images and prompts.
 ![demo](./assets/demo.gif) 
-PS: the Huggingface space was running slow while I recorded this.
 
-## Disclaimer ⚠️
-This is a demo client based over limited scraping data. No user data is collected and persistantly stored without user consent in any form under any context.
+### Disclaimer
+This is a demo client backed by limited scraped data of tshirts for men and women.
+No user data is persistantly stored under any instance of the process.
 
-## Future features
+### Future features
 - Past chat history
 - Live price fetching
 
-## Development Details
+### Development Details
 - Frontend - React.js
-- Server for image embeddings - HuggingFace spaces: free tier
-- Server for database searching - `node-pg` hosted on Supabase
+- Server for image embeddings - HuggingFace spaces free tier
+- Server for database searching - PostgreSQL hosted on Supabase
 
