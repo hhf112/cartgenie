@@ -6,7 +6,7 @@ simpy attach an image optionally followed by a further description of your desir
 </center>
 
 ![demo](./assets/demo.gif) 
-PS: the Huggingface space was running slow while I recorded this. lol.
+PS: the Huggingface space was running slow while I recorded this.
 
 ## Disclaimer ⚠️
 This is a demo client based over limited scraping data. No user data is collected and persistantly stored without user consent in any form under any context.
