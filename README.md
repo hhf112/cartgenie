@@ -1,7 +1,23 @@
-deployed (for further info check respective folders) <br>
-![Vercel Status](https://img.shields.io/badge/Vercel-live-light_green) 
+<center>
+<h1> CartGenie 0.1 <img src = "https://img.shields.io/badge/Vercel-live-light_green" alt = "Vercel Status" /> </h1> 
+<h3> Automated search for you to find those matching pairs!</h3>
+simpy attach an image optionally followed by a further description of your desire 
+</center>
 
 ![demo](./assets/demo.gif) 
 PS: the Huggingface space was running slow while I recorded this. lol.
 
-documentation to be added soon. App is still under experimentation for more accurate results. <br>
+## Disclaimer ⚠️
+This is a demo client based over limited scraping data. No user data is collected and persistantly stored without user consent in any form under any context.
+
+Experimentation is still be ongoing to improve the accuracy of the tool. 
+
+## Upcoming features
+- Past chat history
+- Live price fetching
+
+## Development Details
+- Frontend - React.js
+- Server for image embeddings - HuggingFace spaces: free tier
+- Server for database searching - `node-pg` hosted on Supabase
+
