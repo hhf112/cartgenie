@@ -3,13 +3,13 @@
 search over a database of amazon products using images and prompts.
 ![demo](./assets/demo.gif) 
 
-### Disclaimer
+### Disclaimer ⚠️
 This is a demo client backed by limited scraped data of tshirts for men and women.
 No user data is persistantly stored under any instance of the process.
 
 ### Future features
-- Past chat history
-- Live price fetching
+- [] Past chat history
+- [] Live price fetching
 
 ### Development Details
 - Frontend - React.js
