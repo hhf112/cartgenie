@@ -8,7 +8,7 @@ This is a demo client backed by limited scraped data of tshirts for men and wome
 No user data is persistantly stored under any instance of the process.
 
 ### Future features
-- [ ] Past chat history
+- [ ] Auth for past chat history 
 - [ ] Live price fetching
 
 ### Development Details

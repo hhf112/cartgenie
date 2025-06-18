@@ -1,3 +1,0 @@
-- [x] vercel host
-- [x] Image Uploading
-- [x] Content 
