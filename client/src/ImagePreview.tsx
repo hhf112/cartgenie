@@ -6,6 +6,8 @@ export function ImagePreview() {
 
   const { removeImageFromState, addImagesToState, images } = useContext(promptContext);
 
+  
+
   return (
     <div className="w-full p-1 flex text-sm items-end overflow-auto" onDrop={(e) => {
       e.preventDefault();

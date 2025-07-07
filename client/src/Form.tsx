@@ -64,7 +64,7 @@ export function Form() {
     }}>
 
       <textarea ref={TextInputRef} name="TextPrompt" className=" w-full resize-none focus:outline-none placeholder-gray-500 text-black h-10  overflow-auto p-2 "
-        placeholder="Describe your ideas for better results..."
+        placeholder="Describe your ideas precisely for better results."
       />
 
 
