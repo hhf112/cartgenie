@@ -1,9 +1,7 @@
 import cors from 'cors';
 import fs from "fs"
 import "dotenv/config"
-import express from 'express';
-import FormData from "form-data";
-import fetch from "node-fetch"
+import express  from 'express';
 
 import { supabase } from "./db.js"
 import { pg } from "./db.js";
@@ -13,7 +11,7 @@ const app = express();
 try {
   pg.connect();
 } catch (err) {
-  console.log("database failed: ", error)
+  console.log("database failed: ", err)
   process.exit(1);
 }
 
@@ -28,7 +26,6 @@ const search = async (req, res) => {
     const embedding = req.body.embeddings;
     
     const result = await pg.query(`SELECT url, caption, product_url FROM products ORDER BY noindex <-> '[${embedding}]' LIMIT 5;`);
-
 
     res.status(200).json(result)
     console.log("request served")
