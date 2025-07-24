@@ -10,19 +10,6 @@ import { PromptContextProvider, promptContext, type promptContextType } from "./
 import { SessionContext, type SessionContextType } from "./contexts/SessionContextProvider.tsx";
 import { ContentContextProvider } from "./contexts/ContentContextProvider.tsx";
 
-
-
-
-function QueryBox() {
-  return (
-    <div className="flex flex-col justify-center items-center w-full">
-      <ImagePreview />
-      <Form />
-      <p className="mt-1 mb-2 text-xs ">Upload an image and see the magic ✨</p>
-    </div>
-  );
-}
-
 function App() {
   const { sessionToken, initSessionToken } = useContext(SessionContext);
 
@@ -33,13 +20,13 @@ function App() {
 
 
   return (
-    <div className="flex  flex-col h-screen  items-center justify-end">
+    <div className="flex px-70 flex-col h-screen  items-center justify-end">
       <NavBar />
-      <div className="flex  flex-col h-screen w-3/5 items-center justify-end">
+      <div className="flex  w-full flex-col h-screen  items-center justify-end">
         <ContentContextProvider>
           <Content />
           <PromptContextProvider>
-            <QueryBox />
+            <Form />
           </PromptContextProvider>
         </ContentContextProvider>
       </div>
