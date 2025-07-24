@@ -5,7 +5,6 @@ import { promptContext } from './contexts/PromptContextProvider'
 import type { promptContextType } from "./contexts/PromptContextProvider"
 import { SessionContext, type SessionContextType } from './contexts/SessionContextProvider'
 import { contentContext, type contentContextType, type contentType, type Product, type waitingMessage } from './contexts/ContentContextProvider'
-import { Disclaimer } from './components'
 
 
 export function Form() {
