@@ -66,8 +66,8 @@ export function Content() {
       ) : (
         <h1 className={`text-2xl  font-Inter text-neutral-500
 ${mount ? "opacity-100 scale-100 translate-y-0" : "opacity-0 scale-80 translate-y-5"}
-transition-all transform duration-1000 delay-1000`}>
-          Attach an image and see the magic!
+transition-all transform duration-500 delay-400`}>
+          Attach an image or a prompt!
         </h1>
       )
       }
