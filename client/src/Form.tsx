@@ -6,6 +6,11 @@ import type { promptContextType } from "./contexts/PromptContextProvider"
 import { SessionContext, type SessionContextType } from './contexts/SessionContextProvider'
 import { contentContext, type contentContextType, type contentType, type Product, type waitingMessage } from './contexts/ContentContextProvider'
 
+const backend = import.meta.env.VITE_BACKEND;
+if (!backend) {
+  console.error("backend url not found.");
+}
+
 
 export function Form() {
   /* USE */
@@ -42,24 +47,23 @@ export function Form() {
 
       setWaiting(prev => ({
         on: true,
-        text: "processing your image please wait..."
+        text: "processing your result please wait ..."
       }));
 
-      const embeds = await getEmbeddings(promptData);
+      const post = await fetch(`${backend}/upload`, {
+        method: "POST",
+        body: promptData,
+      });
 
-      setWaiting(prev => ({
-        on: true,
-        text: "searching for matches ..."
-      }));
-
-      const results = await runSearch(embeds);
+      if (!post.ok) throw new Error("failed to get results")
+      const postJSON = await post.json();
+      const results = postJSON.rows;
       addResults(results);
 
       setWaiting(prev => ({
         text: "",
         on: false,
       }))
-
     } catch (err) {
       setWaiting(prev => ({
         text: "Unknown error occured. Please try again later.",
@@ -99,6 +103,7 @@ export function Form() {
 
       {/* FORM */}
       <form
+        key={sessionToken}
         className={`flex flex-col w-full border border-neutral-200 p-2 rounded-3xl shadow-xl overflow-auto
       ${mount ? "scale-100" : "opacity-5"} 
   ${secMount && "shadow-cyan-200 shadow-lg"}
@@ -127,7 +132,7 @@ duration-200 delay-100`}
 
           <button type="button"
             className="w-10 cursor-pointer h-10 p-1 rounded-xl mx-0.5
-          hover:scale-110 hover:-translate-x-1 hover:bg-cyan-200
+          hover:scale-105 hover:-translate-x-0.5 hover:bg-cyan-200
           transition-all transform duration-100 delay-100" onClick={() => {
               ImageInputRef.current.click();
             }}>
