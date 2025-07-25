@@ -1,5 +1,5 @@
 import { ItemCard } from "./ItemCard.tsx";
-import React, { useContext, useEffect, useState } from "react";
+import React, { Suspense, useContext, useEffect, useState } from "react";
 import { promptContext, PromptContextProvider, type promptContextType } from "../contexts/PromptContextProvider";
 
 import { contentContext, type waitingMessage, type Product, type contentContextType, type contentType } from "../contexts/ContentContextProvider.tsx";
@@ -38,8 +38,6 @@ export function Content() {
 
   useEffect(() => setMount(true), []);
 
-
-
   /* component */
   return (
     <div
@@ -51,7 +49,7 @@ export function Content() {
             return (
               <div className="w-full my-1">
 
-                <p> {cont.text} </p>
+                <p className="text-neutral-600 font-Inter"> {cont.text} </p>
 
                 <div className="flex w-full items-center rounded-2xl overflow-auto mx-1 my-1">
                   {cont.products.map(prod => <ItemCard itemName={prod.title} imageUrl={prod.imageUrl} url={prod.url} site={prod.site} />)}
@@ -60,7 +58,6 @@ export function Content() {
               </div>
             )
           }
-
           else if (cont.label == "memo") {
             return <Memo cont={cont} />
           }
@@ -70,7 +67,7 @@ export function Content() {
         <h1 className={`text-2xl  font-Inter text-neutral-500
 ${mount ? "opacity-100 scale-100 translate-y-0" : "opacity-0 scale-80 translate-y-5"}
 transition-all transform duration-1000 delay-1000`}>
-            Attach an image and see the magic!
+          Attach an image and see the magic!
         </h1>
       )
       }

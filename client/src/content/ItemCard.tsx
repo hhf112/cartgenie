@@ -1,4 +1,4 @@
-import React from "react"
+import React, { useEffect, useState } from "react"
 
 interface itemCardParams {
   itemName: string,
@@ -7,8 +7,12 @@ interface itemCardParams {
   site: string
 }
 export function ItemCard({ itemName, imageUrl, url, site }: itemCardParams) {
+  const [mount, setMount] = useState(false);
+  useEffect(() => setMount(true), []);
+
   return (
-    <div className="shrink-0 w-1/2 h-40 flex rounded-xl justify-start items-center border border-gray-300 m-1 shadow-xl overflow-y-hidden overflow-x-auto text-sm p-2">
+    <div className={`shrink-0 w-1/2 h-40 flex rounded-xl justify-start items-center border border-gray-300 m-1 shadow-xl overflow-y-hidden overflow-x-auto text-sm p-2
+${mount ? "translate-y-0": "translate-y-4" } transition-all transform duration-300 delay-75 `}>
       <img src={imageUrl} className="rounded-2xl max-h-full w-2/5  m-3 object-contain" />
       <div className="w-3/5 h-full flex min-w-0 flex-col justify-start items-start p-1">
         <p className="whitespace-normal break-words min-w-0 text-left font-semibold overflow-scroll"> {itemName} </p>
