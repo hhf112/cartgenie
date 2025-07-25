@@ -2,6 +2,7 @@
 ![Vercel Status](https://img.shields.io/badge/Vercel-live-green) <br>
 search over a database of amazon products using images and prompts.
 ![demo](./assets/demo.gif) 
+(UI has been updated. demo will be updated soon.)
 
 ### Disclaimer ⚠️
 - This is a demo client backed by limited scraped data of tshirts for men and women.

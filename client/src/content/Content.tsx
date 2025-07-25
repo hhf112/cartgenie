@@ -43,7 +43,7 @@ export function Content() {
   /* component */
   return (
     <div
-      className="p-5 flex flex-col h-full  w-full  min-w-0 overflow-x-hidden justify-end items-center  my-3 px-4">
+      className="p-4 flex flex-col h-full  overflow-y-auto w-full  min-w-0 overflow-x-hidden justify-end items-center  my-3 px-4">
 
       {content.length ? (
         content.map((cont: contentType) => {
@@ -67,10 +67,10 @@ export function Content() {
 
         })
       ) : (
-        <h1 className={` text-2xl  font-Inter text-neutral-500
+        <h1 className={`text-2xl  font-Inter text-neutral-500
 ${mount ? "opacity-100 scale-100 translate-y-0" : "opacity-0 scale-80 translate-y-5"}
-transition-all transform duration-300 delay-75`}>
-          Welcome to Cart Genie!
+transition-all transform duration-1000 delay-1000`}>
+            Attach an image and see the magic!
         </h1>
       )
       }

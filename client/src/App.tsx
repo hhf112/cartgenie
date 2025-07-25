@@ -20,7 +20,7 @@ function App() {
 
 
   return (
-    <div className="flex px-70 flex-col h-screen  items-center justify-end">
+    <div className="flex  px-70 flex-col h-screen  items-center justify-end">
       <NavBar />
       <div className="flex  w-full flex-col h-screen  items-center justify-end">
         <ContentContextProvider>

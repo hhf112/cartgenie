@@ -95,7 +95,7 @@ export function ContentContextProvider({ children }: { children: React.ReactNode
 
   async function getEmbeddings(promptData: FormData) {
     try {
-      const getEmbeddings = await fetch(`${import.meta.env.VITE_EMBEDADRR}/upload`, {
+      const getEmbeddings = await fetch(`${import.meta.env.VITE_EMBEDADDR}/upload`, {
         method: "POST",
         body: promptData
       })
