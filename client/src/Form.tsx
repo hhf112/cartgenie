@@ -16,11 +16,16 @@ export function Form() {
   const { resetQuery, removeImageFromState, images, addImagesToState, } = useContext<promptContextType>(promptContext);
   const { addMemo, waiting, setWaiting, addResults, getEmbeddings, runSearch } = useContext<contentContextType>(contentContext)
 
-  /* STATES */
+  /* states */
   const [mount, setMount] = useState<boolean>(false);
+  const [secMount, setSecMount] = useState<boolean>(false);
 
   useEffect(() => {
-    setTimeout(() => setMount(true), 100);
+    setTimeout(() => {
+      setMount(true);
+      setSecMount(true);
+      setTimeout(() => setSecMount(false), 500);
+    }, 100);
   }, []);
 
 
@@ -96,6 +101,7 @@ export function Form() {
       <form
         className={`flex flex-col w-full border border-neutral-200 p-2 rounded-3xl shadow-xl overflow-auto
       ${mount ? "scale-100" : "opacity-5"} 
+  ${secMount && "shadow-cyan-200 shadow-lg"}
       transition-all transform delay-100 duration-75" }`}
         onSubmit={(e) => {
           e.preventDefault();

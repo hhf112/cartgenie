@@ -6,18 +6,17 @@ export function NavBar() {
 
   const { initSessionToken } = useContext(SessionContext);
   return (
-    <div className="flex justify-start w-1/5 items-stretch absolute left-3 top-0 h-15">
-
-      {/* navbar */}
-      <img title = "past chats" src = "./icons/nav-bar.png" className = "cursor-pointer p-2 m-1 rounded-xl hover:bg-gray-200 object-cover"/>
-
-      {/*New chat button*/}
-      <img title="New chat" src="./icons/create-new-chat.png" className="cursor-pointer p-3 m-1 rounded-xl hover:bg-gray-200 object-cover" onClick={() => initSessionToken()} />
-
-
-      {/* meta */}
-      < div title="Learn More" className="cursor-pointer font-semibold text-xl text-neutral-900 m-1 hover:bg-gray-200  px-2 py-3 rounded-xl text-center flex items-center object-cover"> CartGenie</div>
-    </div >
+    <div className=" border-neutral-200  fixed top-2 left-2 px-3 py-4 
+      rounded-xl flex  justify-start items-center cursor-not-allowed">
+      <div
+        className=" font-semibold text-xl text-neutral-700 mx-0.5 rounded-xl text-center flex items-center object-cover"
+        title="Learn More" >
+        CartGenie
+      </div>
+      <div className="h-5 w-5 mx-0.5">
+        <img src="/favicon.png" className="h-full w-full" />
+      </div>
+    </div>
   )
 
 }
