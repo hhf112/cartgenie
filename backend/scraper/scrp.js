@@ -6,7 +6,7 @@ import "dotenv/config"
 
 async function getEmbeddingFromUrl(imageUrl) {
   try {
-    const resp = await fetch(`${process.env.NGROK_URL}/upload`, {
+    const resp = await fetch(`${process.env.EMBEDADDR}/upload`, {
       method: "POST",
       headers: {
         "Content-type": "application/json"

@@ -1,5 +1,4 @@
 import cors from 'cors';
-import fs from "fs"
 import "dotenv/config"
 import express from 'express';
 import FormData from 'form-data';
@@ -53,7 +52,6 @@ app.post('/upload', upload.single('images'), async function(req, res, next) {
     // console.log(result);
 
     res.status(200).json(result);
-
   } catch (err) {
     console.log(err);
     res.status(500).json({ message: "Internal server error." });
