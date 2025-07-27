@@ -4,7 +4,7 @@ import { useRef } from 'react'
 import { promptContext } from './contexts/PromptContextProvider'
 import type { promptContextType } from "./contexts/PromptContextProvider"
 import { SessionContext, type SessionContextType } from './contexts/SessionContextProvider'
-import { contentContext, type contentContextType, type contentType, type Product, type waitingMessage } from './contexts/ContentContextProvider'
+import { contentContext, type contentContextType, type contentType, type Product } from './contexts/ContentContextProvider'
 
 const backend = import.meta.env.VITE_BACKEND;
 if (!backend) {
@@ -19,7 +19,7 @@ export function Form() {
   const ImageInputRef = useRef<HTMLInputElement>(document.createElement("input"));
   const TextInputRef = useRef<HTMLTextAreaElement>(document.createElement("textarea"));
   const { resetQuery, removeImageFromState, images, addImagesToState, } = useContext<promptContextType>(promptContext);
-  const { addMemo, waiting, setWaiting, addResults, getEmbeddings, runSearch } = useContext<contentContextType>(contentContext)
+  const { addMemo, setWaiting, addResults } = useContext<contentContextType>(contentContext)
 
   /* states */
   const [mount, setMount] = useState<boolean>(false);
@@ -35,21 +35,21 @@ export function Form() {
 
 
   async function submitPrompt() {
-    const promptData = new FormData();
-    promptData.append("session", sessionToken);
     const prompt = TextInputRef.current.value
 
+    const promptData = new FormData();
+    promptData.append("session", sessionToken);
     promptData.append("text", prompt);
     images.forEach(img => promptData.append("images", img.file));
+
+    addMemo(prompt, images);
+    resetQuery(TextInputRef);
+    setWaiting(prev => ({
+      on: true,
+      text: "processing your result please wait ..."
+    }));
+
     try {
-      addMemo(prompt, images);
-      resetQuery(TextInputRef);
-
-      setWaiting(prev => ({
-        on: true,
-        text: "processing your result please wait ..."
-      }));
-
       const post = await fetch(`${backend}/upload`, {
         method: "POST",
         body: promptData,

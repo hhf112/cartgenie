@@ -1,10 +1,8 @@
-
 import { useContext, useEffect } from "react";
 
 import { NavBar } from "./NavBar.tsx"
 import { Content } from "./content/Content.tsx";
 import { Form } from "./Form.tsx"
-import { ImagePreview } from './ImagePreview.tsx';
 
 import { PromptContextProvider, promptContext, type promptContextType } from "./contexts/PromptContextProvider";
 import { SessionContext, type SessionContextType } from "./contexts/SessionContextProvider.tsx";
@@ -16,8 +14,6 @@ function App() {
   useEffect(() => {
     console.log("new session.")
   }, [sessionToken])
-
-
 
   return (
     <div className="flex  px-70 flex-col h-screen  items-center justify-end">

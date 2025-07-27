@@ -27,8 +27,6 @@ export interface contentContextType {
   waiting: waitingMessage,
   setWaiting: Dispatch<SetStateAction<waitingMessage>>,
   addResults: (rows: Item[]) => void,
-  getEmbeddings: (prompt: FormData) => Promise<Number[]>,
-  runSearch: (embeds: Number[]) => Promise<Item[]>,
   addMemo: (prompt: string, images: Image[]) => void,
 }
 
@@ -46,11 +44,8 @@ export const contentContext = createContext<contentContextType>({
   },
   setWaiting: (prev) => { },
   addResults: (rows: Item[]) => { },
-  getEmbeddings: (prompt: FormData) => Promise.resolve([]),
-  runSearch: (embeds: Number[]) => Promise.resolve([]),
-  addMemo: (prompt: string, images: Image[]) => {}
+  addMemo: (prompt: string, images: Image[]) => { }
 })
-
 
 
 export function ContentContextProvider({ children }: { children: React.ReactNode }) {
@@ -60,13 +55,14 @@ export function ContentContextProvider({ children }: { children: React.ReactNode
     on: false,
   });
 
+
   function addMemo(prompt: string, images: Image[]) {
-      setContent((prev: contentType[]) => [...prev, {
-        label: "memo",
-        text: prompt,
-        products: [],
-        imgs: images
-      }])
+    setContent((prev: contentType[]) => [...prev, {
+      label: "memo",
+      text: prompt,
+      products: [],
+      imgs: images
+    }])
   }
 
   function addResults(rows: Item[]) {
@@ -93,43 +89,6 @@ export function ContentContextProvider({ children }: { children: React.ReactNode
     setContent((prev: contentType[]) => [...prev, display]);
   }
 
-  async function getEmbeddings(promptData: FormData) {
-    try {
-      const getEmbeddings = await fetch(`${import.meta.env.VITE_EMBEDADDR}/upload`, {
-        method: "POST",
-        body: promptData
-      })
-
-      if (!getEmbeddings.ok) throw new Error("failed to query embeddings")
-      const embeds = await getEmbeddings.json();
-
-      return embeds;
-    } catch (err) {
-      console.log(err);
-      throw err;
-    }
-  }
-
-  async function runSearch(embeds: Number[]) {
-    try {
-      const results = await fetch(`${import.meta.env.VITE_RESADDR}/upload`, {
-        method: "POST",
-        headers: {
-          "Content-type": "application/json",
-        },
-        body: JSON.stringify({
-          embeddings: embeds
-        })
-      })
-      if (!results.ok) throw new Error("failed to get results")
-      const products = await results.json();
-      return products.rows;
-    } catch (err) {
-      console.log(err);
-      throw err;
-    }
-  }
-
 
   return (
     <contentContext.Provider value={{
@@ -138,8 +97,6 @@ export function ContentContextProvider({ children }: { children: React.ReactNode
       setWaiting,
       addResults,
       addMemo,
-      getEmbeddings,
-      runSearch,
     }}>
 
       {children}
