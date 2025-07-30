@@ -55,7 +55,15 @@ export function Form() {
         body: promptData,
       });
 
-      if (!post.ok) throw new Error("failed to get results")
+      if (post.status === 429) {
+        setWaiting({
+          on: true,
+          text: "You are restricted to 2 requests per hour and 10 requests per day"
+        });
+        return;
+      }
+
+      else if (!post.ok) throw new Error("failed to get results")
       const postJSON = await post.json();
       const results = postJSON.rows;
       addResults(results);
