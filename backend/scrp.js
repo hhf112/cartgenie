@@ -1,12 +1,12 @@
 import puppeteer from 'puppeteer'
-import { supabase } from "../db.js"
+import { supabase } from "./db.js"
 import { spawn } from 'child_process';
 import "dotenv/config"
 
 
 async function getEmbeddingFromUrl(imageUrl) {
   try {
-    const resp = await fetch(`${process.env.EMBEDADDR}/upload`, {
+    const resp = await fetch(`${process.env.EMBEDADDR}/embed`, {
       method: "POST",
       headers: {
         "Content-type": "application/json"
@@ -17,6 +17,7 @@ async function getEmbeddingFromUrl(imageUrl) {
     })
 
     const embedding = await resp.json();
+    console.log(embedding);
     return embedding
 
   } catch (error) {
@@ -32,7 +33,7 @@ await (async () => {
     const page = await browser.newPage();
 
 
-    await page.goto("https://www.amazon.in/s?k=womens+graphic+tshirts&crid=3UOPGCWZ3QV3H&sprefix=womens+graphic+tshirts%2Caps%2C298&ref=nb_sb_noss_2");
+    await page.goto("https://www.amazon.in/s?k=men%27s+graphic&crid=20RPREX6VNY0R&sprefix=men%27s+grap%2Caps%2C390&ref=nb_sb_noss_2");
 
     const title = await page.title();
     console.log(title)
