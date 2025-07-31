@@ -1,25 +1,51 @@
-import React, { useContext, useEffect, useState } from 'react'
-import { useRef } from 'react'
-
-import { promptContext } from './contexts/PromptContextProvider'
-import type { promptContextType } from "./contexts/PromptContextProvider"
-import { SessionContext, type SessionContextType } from './contexts/SessionContextProvider'
-import { contentContext, type contentContextType, type contentType, type Product } from './contexts/ContentContextProvider'
+import React, { useContext, useEffect, useState, useRef, type Dispatch, type SetStateAction, type RefObject } from 'react'
+import type { Image, contentType, Item, Product, waitingMessage } from './ContentTypes'
 
 const backend = import.meta.env.VITE_BACKEND;
 if (!backend) {
   console.error("backend url not found.");
 }
 
+function ImageCard({ image, addImagesToState, removeImageFromState }: {
+  image: Image,
+  addImagesToState: (fileArray: FileList | null) => void,
+  removeImageFromState: (imageKey: string) => void,
+}) {
+  return (
+    <div className="w-full p-1 flex text-sm items-end overflow-auto" onDrop={(e) => {
+      e.preventDefault();
+      addImagesToState(e.dataTransfer.files);
+    }} onDragOver={(e) => e.preventDefault()}>
 
-export function Form() {
-  /* USE */
-  const { sessionToken } = useContext<SessionContextType>(SessionContext);
-  const promptInfo = useRef<HTMLInputElement>(null);
+      <div className="w-30 h-30 relative mx-1 shrink-0">
+        <img src={image.url} className=" rounded-xl w-full h-full object-cover" />
+        <button className="absolute top-3 right-3 cursor-pointer" type="button"
+          onClick={() => removeImageFromState(image.url)} > <img src="./icons/remove.png" className="w-3  h-3 object-cover" /></button>
+      </div>
+    </div>
+  )
+}
+
+
+export function QueryBox({
+  setContent,
+  setWaiting,
+  resetQuery,
+  removeImageFromState,
+  images,
+  addImagesToState,
+}: {
+  setContent: Dispatch<SetStateAction<contentType[]>>,
+  setWaiting: Dispatch<SetStateAction<waitingMessage>>,
+  resetQuery: (textbox: RefObject<HTMLTextAreaElement>) => void,
+  removeImageFromState: (removeUrl: string) => void,
+  addImagesToState: (fileArray: FileList | null) => Image[],
+  images: Image[],
+}) {
+
+  /* use */
   const ImageInputRef = useRef<HTMLInputElement>(document.createElement("input"));
   const TextInputRef = useRef<HTMLTextAreaElement>(document.createElement("textarea"));
-  const { resetQuery, removeImageFromState, images, addImagesToState, } = useContext<promptContextType>(promptContext);
-  const { addMemo, setWaiting, addResults } = useContext<contentContextType>(contentContext)
 
   /* states */
   const [mount, setMount] = useState<boolean>(false);
@@ -34,14 +60,42 @@ export function Form() {
   }, []);
 
 
+
+  function addMemo(prompt: string, images: Image[]) {
+    setContent((prev: contentType[]) => [...prev, {
+      label: "memo",
+      text: prompt,
+      products: [],
+      imgs: images
+    }])
+  }
+
+  function addResults(rows: Item[]) {
+    const display: contentType = {
+      label: "content",
+      text: `found ${rows.length} result(s)!`,
+      products: [],
+      imgs: []
+    }
+
+    rows.forEach((row) => {
+      display.products.push({
+        title: row.caption,
+        url: row.product_url,
+        site: "amazon",
+        imageUrl: row.url
+      })
+    })
+
+    setContent((prev: contentType[]) => [...prev, display]);
+  }
+
+
   async function submitPrompt() {
     const prompt = TextInputRef.current.value
-
     const promptData = new FormData();
-    promptData.append("session", sessionToken);
     promptData.append("text", prompt);
     images.forEach(img => promptData.append("images", img.file));
-
     addMemo(prompt, images);
     resetQuery(TextInputRef);
     setWaiting(prev => ({
@@ -50,10 +104,18 @@ export function Form() {
     }));
 
     try {
+      let fch = 0;
+      setTimeout(() => {
+        if (!fch) {
+          setWaiting({ text: "server is cold starting please wait a few seconds!", on: true });
+        }
+      }, 3000);
+
       const post = await fetch(`${backend}/upload`, {
         method: "POST",
         body: promptData,
       });
+      fch = 1;
 
       if (post.status === 429) {
         setWaiting({
@@ -67,7 +129,6 @@ export function Form() {
       const postJSON = await post.json();
       const results = postJSON.rows;
       addResults(results);
-
       setWaiting(prev => ({
         text: "",
         on: false,
@@ -93,11 +154,9 @@ export function Form() {
       }} onDragOver={(e) => e.preventDefault()}>
 
         {images.map((image, index) => (
-          <div key={index} className="w-30 h-30 relative mx-1 shrink-0">
-            <img src={image.url} className=" rounded-xl w-full h-full object-cover" />
-            <button className="absolute top-3 right-3 cursor-pointer" type="button"
-              onClick={() => removeImageFromState(image.url)} > <img src="./icons/remove.png" className="w-3  h-3 object-cover" /></button>
-          </div>
+          <ImageCard
+            key={index.toString()}
+            image={image} addImagesToState={addImagesToState} removeImageFromState={removeImageFromState} />
         ))}
 
         {images.length < 1 &&
@@ -111,7 +170,6 @@ export function Form() {
 
       {/* FORM */}
       <form
-        key={sessionToken}
         className={`flex flex-col w-full border border-neutral-200 p-2 rounded-3xl shadow-xl overflow-auto
       ${mount ? "scale-100" : "opacity-5"} 
   ${secMount && "shadow-cyan-200 shadow-lg"}
@@ -130,7 +188,7 @@ duration-200 delay-100`}
           placeholder="Describe your ideas precisely for better results ..."
         />
 
-        {/* IMAGE INPUT REF */}
+        {/* BUTTONS */}
         <input multiple type="file" name="ImagePrompt" accept="image/*" className="hidden" ref={ImageInputRef}
           onChange={e => { addImagesToState(e.target.files) }} />
 

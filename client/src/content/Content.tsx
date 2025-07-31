@@ -1,10 +1,7 @@
 import { ItemCard } from "./ItemCard.tsx";
 import React, { Suspense, useContext, useEffect, useState } from "react";
-import { promptContext, PromptContextProvider, type promptContextType } from "../contexts/PromptContextProvider";
 
-import { contentContext, type waitingMessage, type Product, type contentContextType, type contentType } from "../contexts/ContentContextProvider.tsx";
-
-
+import type { waitingMessage, Product, contentContextType, contentType } from "../ContentTypes.ts";
 
 function Memo({ cont }: { cont: contentType }) {
   const [mount, setMount] = useState<boolean>(false);
@@ -31,9 +28,8 @@ function Memo({ cont }: { cont: contentType }) {
 
 }
 
-export function Content() {
-  /* statees*/
-  const { waiting, content } = useContext<contentContextType>(contentContext);
+export function Content({ content, waiting }: { content: contentType[], waiting: waitingMessage }) {
+  /* states */
   const [mount, setMount] = useState<boolean>(false);
 
   useEffect(() => setMount(true), []);

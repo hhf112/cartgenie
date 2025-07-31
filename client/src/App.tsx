@@ -2,32 +2,34 @@ import { useContext, useEffect } from "react";
 
 import { NavBar } from "./NavBar.tsx"
 import { Content } from "./content/Content.tsx";
-import { Form } from "./Form.tsx"
+import { QueryBox } from "./QueryBox.tsx"
+import { Home } from "./Home.tsx";
 
-import { PromptContextProvider, promptContext, type promptContextType } from "./contexts/PromptContextProvider";
-import { SessionContext, type SessionContextType } from "./contexts/SessionContextProvider.tsx";
-import { ContentContextProvider } from "./contexts/ContentContextProvider.tsx";
+const backend = import.meta.env.VITE_BACKEND;
+if (!backend) {
+  console.error("backend url not found");
+}
 
 function App() {
-  const { sessionToken, initSessionToken } = useContext(SessionContext);
+  // const ping = async () => fetch(`${backend}/91u340`);
+  //
+  // useEffect(() => {
+  //   const checkStatus = async () => {
+  //     try {
+  //     const status = await ping();
+  //     const statusJSON = await status.json();
+  //     } catch (err) {
+  //       console.error ("service unreachable");
+  //     }
+  //   }
+  //
+  //   checkStatus();
+  // }, []);
 
-  useEffect(() => {
-    console.log("new session.")
-  }, [sessionToken])
 
   return (
-    <div className="flex  px-70 flex-col h-screen  items-center justify-end">
-      <NavBar />
-      <div className="flex  w-full flex-col h-screen  items-center justify-end">
-        <ContentContextProvider>
-          <Content />
-          <PromptContextProvider>
-            <Form />
-          </PromptContextProvider>
-        </ContentContextProvider>
-      </div>
-    </div >
-  );
+    <Home/>
+  )
 }
 
 export default App
