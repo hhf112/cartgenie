@@ -1,7 +1,7 @@
 import { useState, type RefObject } from "react";
-import { type Image, type contentType, type waitingMessage } from "./ContentTypes";
+import { type Image, type contentType, type waitingMessage } from "../../ContentTypes";
 import { NavBar } from "./NavBar";
-import { Content } from "./content/Content";
+import { Content } from "./Content";
 import { QueryBox } from "./QueryBox";
 
 export function Home() {

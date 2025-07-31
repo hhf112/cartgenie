@@ -1,5 +1,5 @@
 import React, { useContext, useEffect, useState, useRef, type Dispatch, type SetStateAction, type RefObject } from 'react'
-import type { Image, contentType, Item, Product, waitingMessage } from './ContentTypes'
+import type { Image, contentType, Item, Product, waitingMessage } from '../../ContentTypes'
 
 const backend = import.meta.env.VITE_BACKEND;
 if (!backend) {

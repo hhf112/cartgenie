@@ -1,7 +1,8 @@
 import { ItemCard } from "./ItemCard.tsx";
 import React, { Suspense, useContext, useEffect, useState } from "react";
 
-import type { waitingMessage, Product, contentContextType, contentType } from "../ContentTypes.ts";
+import type { waitingMessage, Product, contentContextType, contentType } from "../../ContentTypes.ts";
+
 
 function Memo({ cont }: { cont: contentType }) {
   const [mount, setMount] = useState<boolean>(false);
@@ -44,9 +45,7 @@ export function Content({ content, waiting }: { content: contentType[], waiting:
           if (cont.label == "content") {
             return (
               <div className="w-full my-1">
-
                 <p className="text-neutral-600 font-Inter"> {cont.text} </p>
-
                 <div className="flex w-full items-center rounded-2xl overflow-auto mx-1 my-1">
                   {cont.products.map(prod => <ItemCard itemName={prod.title} imageUrl={prod.imageUrl} url={prod.url} site={prod.site} />)}
                 </div>

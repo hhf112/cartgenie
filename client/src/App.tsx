@@ -1,9 +1,6 @@
 import { useContext, useEffect } from "react";
 
-import { NavBar } from "./NavBar.tsx"
-import { Content } from "./content/Content.tsx";
-import { QueryBox } from "./QueryBox.tsx"
-import { Home } from "./Home.tsx";
+import { Home } from "./pages/Home/Home.tsx";
 
 const backend = import.meta.env.VITE_BACKEND;
 if (!backend) {
